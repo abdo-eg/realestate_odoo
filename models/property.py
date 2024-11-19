@@ -8,6 +8,7 @@ class Property(models.Model):
     postcode = fields.Char()
     data_availability = fields.Date()
     expected_price = fields.Float()
+    selling_price = fields.Float()
     bedrooms = fields.Integer()
     garage = fields.Boolean()
     garden = fields.Boolean()
