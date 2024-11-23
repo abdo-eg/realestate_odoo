@@ -21,6 +21,11 @@ class Property(models.Model):
         ('east','East'),
         ('west','West')
         ])
+    state = fields.Selection([
+        ('draft','Draft'),
+        ('pending','Pending'),
+        ('sold','Sold')
+    ] ,default='draft')
     #add constrains
     @api.constrains('selling_price')
     def _check_selling_price_not_zero(self):
