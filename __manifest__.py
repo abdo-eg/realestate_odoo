@@ -20,4 +20,5 @@
     'installable': True,
     'application': True,
     'license': 'LGPL-3',
+    'web_icon':'static/description/icon.png',
 }
