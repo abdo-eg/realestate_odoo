@@ -1,21 +1,29 @@
-from odoo import models, fields
+from odoo import models, fields, api
+# to use exceptions
+from odoo.exceptions import ValidationError
 
 class Property(models.Model):
     _name = "property"
 
-    name = fields.Char()
+    name = fields.Char(required=1)
     description = fields.Text()
-    postcode = fields.Char()
+    postcode = fields.Char(required=1)
     data_availability = fields.Date()
     expected_price = fields.Float()
     selling_price = fields.Float()
-    bedrooms = fields.Integer()
+    bedrooms = fields.Integer() #use constrains, 0 will considered as a value!
     garage = fields.Boolean()
     garden = fields.Boolean()
     garden_area = fields.Integer()
-    garder_orientation = fields.Selection([
+    garden_orientation = fields.Selection([
         ('north','North'),
         ('south','South'),
         ('east','East'),
         ('west','West')
         ])
+    #add constrains
+    @api.constrains('selling_price')
+    def _check_selling_price_not_zero(self):
+        for record in self:
+            if record.selling_price == 1:
+                raise ValidationError("please enter selling price")
