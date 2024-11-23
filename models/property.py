@@ -32,3 +32,11 @@ class Property(models.Model):
         for record in self:
             if record.selling_price == 1:
                 raise ValidationError("please enter selling price")
+    
+
+    @api.model_create_multi
+    def create(self,vals):
+        res = super(Property , self).create(vals)
+        print("\033[92minside create function!\033[0m")
+
+        return res
